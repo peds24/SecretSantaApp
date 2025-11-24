@@ -31,3 +31,6 @@ generated_links.csv
 
 
 data/
+
+/lib/generated/prisma
+
