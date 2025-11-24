@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Pair {
+  giverId      Int    @id
+  giverName    String
+  receiverId   Int
+  receiverName String
+}
+
+model Wishlist {
+  receiverId Int    @id
+  wishlist   String
+}
+
+model AuthToken {
+  token   String @id
+  giverId Int
+}

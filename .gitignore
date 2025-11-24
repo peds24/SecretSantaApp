@@ -1,0 +1,33 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Next.js
+.next/
+out/
+dist/
+
+# Prisma
+dev.db
+dev.db-journal
+prisma/*.db
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+
+# Logs
+*.log
+
+# Mac OS
+.DS_Store
+
+# Generated links
+generated_links.txt
+generated_links.csv
+
+
+data/
