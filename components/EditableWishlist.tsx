@@ -45,17 +45,40 @@ export function EditableWishlist({
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+    <div className="flex flex-col gap-3 w-full">
+      {/* Textarea */}
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
         rows={8}
-        style={{ width: "100%" }}
+        className="
+          w-full p-3 rounded-xl border border-slate-300 
+          shadow-sm bg-white
+          focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-red-400
+        "
       />
-      <button onClick={handleSave} disabled={saving}>
-        {saving ? "Saving..." : "Save wishlist"}
+
+      {/* Save button */}
+      <button
+        onClick={handleSave}
+        disabled={saving}
+        className="
+          px-4 py-2 rounded-xl font-semibold 
+          text-white 
+          bg-red-600 hover:bg-red-700 
+          disabled:bg-red-300 disabled:cursor-not-allowed
+          transition-all shadow
+        "
+      >
+        {saving ? "Guardando..." : "Guardar Wishlist"}
       </button>
-      {saved && <span>Saved!</span>}
+
+      {/* Saved message */}
+      {saved && (
+        <span className="text-green-600 font-medium text-sm">
+          Guardado!
+        </span>
+      )}
     </div>
   );
 }
