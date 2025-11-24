@@ -10,38 +10,39 @@ datasource db {
 model FamilyGroup {
   id          String       @id @default(cuid())
   name        String
-  slug        String       @unique   // used in the URL, e.g. "smith-family-2025"
+  slug        String       @unique   // e.g. "serdio-2025"
   members     Member[]
   assignments Assignment[]
   createdAt   DateTime     @default(now())
 }
 
 model Member {
-  id                  String        @id @default(cuid())
-  name                String
-  email               String?       @unique
-  familyGroupId       String
-  familyGroup         FamilyGroup   @relation(fields: [familyGroupId], references: [id])
-  givingAssignments   Assignment[]  @relation("GiverAssignments")
-  receivingAssignments Assignment[] @relation("ReceiverAssignments")
-  wishlist            Wishlist?
-  createdAt           DateTime      @default(now())
+  id                   String        @id @default(cuid())
+  name                 String
+  slug                 String        // used in URL, e.g. "pedro", "lala"
+  familyGroupId        String
+  familyGroup          FamilyGroup   @relation(fields: [familyGroupId], references: [id])
+  givingAssignments    Assignment[]  @relation("GiverAssignments")
+  receivingAssignments Assignment[]  @relation("ReceiverAssignments")
+  wishlist             Wishlist?
+  createdAt            DateTime      @default(now())
 
+  // enforce uniqueness within a family
+  @@unique([familyGroupId, slug])
   @@index([familyGroupId, name])
 }
 
 model Assignment {
-  id           String      @id @default(cuid())
+  id            String      @id @default(cuid())
   familyGroupId String
-  familyGroup  FamilyGroup @relation(fields: [familyGroupId], references: [id])
+  familyGroup   FamilyGroup @relation(fields: [familyGroupId], references: [id])
 
-  giverId      String
-  giver        Member      @relation("GiverAssignments", fields: [giverId], references: [id])
+  giverId       String
+  giver         Member      @relation("GiverAssignments", fields: [giverId], references: [id])
 
-  receiverId   String
-  receiver     Member      @relation("ReceiverAssignments", fields: [receiverId], references: [id])
+  receiverId    String
+  receiver      Member      @relation("ReceiverAssignments", fields: [receiverId], references: [id])
 
-  // In a group, a given member is the Secret Santa for exactly one receiver
   @@unique([familyGroupId, giverId])
 }
 

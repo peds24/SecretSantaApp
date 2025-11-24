@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "import:pairs": "node --loader ts-node/esm scripts/importPairsFromCsv.ts data/pairs.csv"
+    "seed:csv": "ts-node prisma/seed-from-csv.ts prisma/data/serdio-2025.csv"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.0.0",
